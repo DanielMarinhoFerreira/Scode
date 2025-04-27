@@ -1,0 +1,15 @@
+# Código que contém acentos inválidos em identificadores
+def somå(a, b):  # O caractere 'å' não é permitido
+    return a + b
+
+def multiplicação(x, y):  # O 'ç' no identificador causa erro
+    return x * y
+
+valør1 = 10  # O caractere 'ø' não é permitido em variáveis
+valor2 = 5
+
+resultado_soma = somå(valør1, valor2)
+resultado_mult = multiplicação(valør1, valor2)
+
+print("Soma:", resultado_soma)
+print("Multiplicação:", resultado_mult)

@@ -1,0 +1,39 @@
+Operação entre tipos incompatíveis
+
+int x = 10
+char y[] = {'2', '0', '\0'}
+int resultado = x + y  // Erro semântico: soma entre inteiro e char[]
+
+Comparação entre tipos incompatíveis
+
+bool ativo = True
+int numero = 5
+
+if (ativo > numero) {  // Erro semântico: comparação entre bool e int
+    print("Ativo é maior que número")
+}
+
+Atribuição de tipo errado
+int idade = {'v', 'i', 'n', 't', 'e', '\0'}  // Erro semântico: atribuição de char[] a um inteiro
+
+Uso de variável antes da declaração
+print(x)  // Erro semântico: variável x não foi declarada
+int x = 10
+
+Chamada de função com número errado de argumentos
+def int soma(int a, int b) {
+    return a + b
+}
+
+int resultado = soma(5)  // Erro semântico: número incorreto de argumentos
+
+Divisão por zero
+int x = 10
+int y = 0
+int resultado = x / y  // Erro semântico: divisão por zero
+
+Uso de variável fora do escopo
+if (True) {
+    int x = 5
+}
+print(x)  // Erro semântico: x não existe fora do bloco if
