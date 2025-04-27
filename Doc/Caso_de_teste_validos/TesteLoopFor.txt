@@ -1,0 +1,5 @@
+list<int> numeros = {1, 2, 3, 4, 5}
+
+for (int numero in numeros) {
+    print(numero)
+}

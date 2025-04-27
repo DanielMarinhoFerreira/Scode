@@ -1,44 +1,37 @@
 from lark import Lark
 from lark import tree
+from Model.TestScode import TesteScode
+from Model.SistemaOperacional import Sistema_Operacional
+from Model.grammar import Grammar
 
 
 
-grammar = """
-    value: dict
-    | list
-    | STRING
-    | NUMBER
-    | "true" | "false" | "null"
-    list : "[" [value ("," value)*] "]"
-    dict : "{" [pair ("," pair)*] "}"
-    pair : STRING ":" value
-    
-    %import common.ESCAPED_STRING -> STRING
-    %import common.SIGNED_NUMBER -> NUMBER
-    %import common.WS
-    %ignore WS
-"""
-grammar01 = """
-    value: dict
-    | list
-    | STRING
-    | NUMBER
-    | "true" -> true
-    | "false" -> false
-    | "null" -> null
+Teste = TesteScode()
 
-"""
+Dir_Img = Sistema_Operacional()
 
+parser = Lark(Grammar().grammar(),parser="lalr", start="start")
 
-json_parser = Lark(grammar, start='value')
+#Teste Tipos Basicos 
+parsed_tree_TesteTiposBasicos = parser.parse(Teste.TesteTiposBasicos())
+tree.pydot__tree_to_png(parsed_tree_TesteTiposBasicos,filename=Dir_Img.Dir_Img()+"\\"+"Img_teste_Validos"+"\\"+"TesteTiposBasicos.png")
 
-text = '{"key": ["item0", "item1", 3.14]}'
-json_parser.parse(text)
+#Teste Condicional
+parsed_tree_TesteListas = parser.parse(Teste.TesteCondicional())
+tree.pydot__tree_to_png(parsed_tree_TesteListas,filename=Dir_Img.Dir_Img()+"\\"+"Img_teste_Validos"+"\\"+"TesteCondicional.png")
 
-code = '{"key": ["item0", "item1", 3.14]}'
+#Teste Lista
+parsed_tree_TesteListas = parser.parse(Teste.TesteListas())
+tree.pydot__tree_to_png(parsed_tree_TesteListas,filename=Dir_Img.Dir_Img()+"\\"+"Img_teste_Validos"+"\\"+"TesteListas.png")
 
-parser = Lark(grammar, start='value')
-ast = parser.parse(code)
+#Teste Loop For
+parsed_tree_TesteListas = parser.parse(Teste.TesteLoopFor())
+tree.pydot__tree_to_png(parsed_tree_TesteListas,filename=Dir_Img.Dir_Img()+"\\"+"Img_teste_Validos"+"\\"+"TesteLoopFor.png")
 
-tree.pydot__tree_to_png(ast, 'parse_tree.png')
+#Teste Loop while
+parsed_tree_TesteListas = parser.parse(Teste.TesteLoopWhile())
+tree.pydot__tree_to_png(parsed_tree_TesteListas,filename=Dir_Img.Dir_Img()+"\\"+"Img_teste_Validos"+"\\"+"TesteLoopWhile.png")
 
+#Teste Loop Funções
+parsed_tree_TesteListas = parser.parse(Teste.TesteFuncoes())
+tree.pydot__tree_to_png(parsed_tree_TesteListas,filename=Dir_Img.Dir_Img()+"\\"+"Img_teste_Validos"+"\\"+"TesteFuncoes.png")

@@ -1,0 +1,6 @@
+int Numero = 0
+
+while (Numero < 10) {
+    print(Numero)
+    Numero += 1
+}

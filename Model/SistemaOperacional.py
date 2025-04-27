@@ -1,13 +1,24 @@
 import os
 import os.path as Pt
 
-class OS:
+class Sistema_Operacional:
     
     def Dir_Doc(Self):
         
         try:
             if Pt.isdir(os.getcwd()+"\\"+"Doc"):
                 dir_doc = os.getcwd()+"\\"+"Doc"
+                return dir_doc
+            else:
+                return None
+        except :
+            return None
+        
+    def Dir_Img(Self):
+        
+        try:
+            if Pt.isdir(os.getcwd()+"\\"+"Img"):
+                dir_doc = os.getcwd()+"\\"+"Img"
                 return dir_doc
             else:
                 return None
