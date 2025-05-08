@@ -1,0 +1,4 @@
+list<char> items = {1, 2, 3, 4, 5}
+
+for (int item in items) 
+    print(item)

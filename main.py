@@ -1,12 +1,13 @@
-from lark import Lark
+from lark import Lark, UnexpectedInput
 from lark import tree
-from Model.TestScode import TesteScode
+from Model.TestScode import TesteScode, TesteLexicoScode
 from Model.SistemaOperacional import Sistema_Operacional
 from Model.grammar import Grammar
 
 
 
 Teste = TesteScode()
+TesteLexico = TesteLexicoScode()
 
 Dir_Img = Sistema_Operacional()
 
@@ -35,3 +36,14 @@ tree.pydot__tree_to_png(parsed_tree_TesteListas,filename=Dir_Img.Dir_Img()+"\\"+
 #Teste Loop Funções
 parsed_tree_TesteListas = parser.parse(Teste.TesteFuncoes())
 tree.pydot__tree_to_png(parsed_tree_TesteListas,filename=Dir_Img.Dir_Img()+"\\"+"Img_teste_Validos"+"\\"+"TesteFuncoes.png")
+
+#Teste Lexico Condicional
+try:    
+    parsed_tree_TesteListas = parser.parse(TesteLexico.TesteCondicional())
+    tree.pydot__tree_to_png(parsed_tree_TesteListas)
+except UnexpectedInput as u:
+    print(u.token)
+    print(u.expected)
+    print(u.line)
+    print(u.column)
+    exit(0)

@@ -1,0 +1,5 @@
+int x = 10
+float ý = 3.14
+str Z = "12"
+char z = 'D'
+bool status = "True"

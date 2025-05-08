@@ -1,0 +1,7 @@
+in a = 45
+
+try (a < 50) {
+     print("Correto")
+} else {
+    print("Errado")
+}

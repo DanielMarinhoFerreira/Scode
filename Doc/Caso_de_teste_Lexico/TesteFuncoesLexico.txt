@@ -1,0 +1,7 @@
+def somå(a, b){  
+    return a + b
+}
+
+resultado_soma = somå(10, 5)
+
+print("Soma:", resultado_soma)
