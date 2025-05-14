@@ -1,5 +1,7 @@
 def int soma(int a, int b) {
-    return a + b
+    int ax_soma = a + b
+    
+    return ax_soma
 }
 
 int resultado = soma(5, 3)

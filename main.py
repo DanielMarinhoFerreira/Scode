@@ -1,13 +1,15 @@
-from lark import Lark, UnexpectedInput
+from lark import Lark, UnexpectedInput, UnexpectedToken, UnexpectedCharacters
 from lark import tree
-from Model.TestScode import TesteScode, TesteLexicoScode
+from Model.TestScode import TesteScode, TesteLexicoScode, TesteSintatico
 from Model.SistemaOperacional import Sistema_Operacional
+from Model.SyntaxError import ErrorMaper
 from Model.grammar import Grammar
 
 
 
 Teste = TesteScode()
 TesteLexico = TesteLexicoScode()
+TesteSintarico = TesteSintatico()
 
 Dir_Img = Sistema_Operacional()
 
@@ -37,13 +39,48 @@ tree.pydot__tree_to_png(parsed_tree_TesteListas,filename=Dir_Img.Dir_Img()+"\\"+
 parsed_tree_TesteListas = parser.parse(Teste.TesteFuncoes())
 tree.pydot__tree_to_png(parsed_tree_TesteListas,filename=Dir_Img.Dir_Img()+"\\"+"Img_teste_Validos"+"\\"+"TesteFuncoes.png")
 
-#Teste Lexico Condicional
-try:    
-    parsed_tree_TesteListas = parser.parse(TesteLexico.TesteCondicional())
+#Teste sintatico Condicional
+_ErrorMaper = ErrorMaper()
+_ErrorMaper.MaperParser(parser=parser)
+
+#Erro atribuição
+try:
+    parsed_tree_TesteListas = parser.parse(TesteSintarico.TesteAtribuicao())
     tree.pydot__tree_to_png(parsed_tree_TesteListas)
-except UnexpectedInput as u:
-    print(u.token)
-    print(u.expected)
-    print(u.line)
-    print(u.column)
-    exit(0)
+except UnexpectedToken as e:
+    expected = ", ".join(_ErrorMaper.traduz_token(t) for t in e.expected)
+    print(f"\nSyntaxError at line {e.line}, column {e.column}: Unexpected token '{e.token}' (type: {e.token.type}). Expected one of: {expected}.")
+
+#Erro Operacao
+try:
+    parsed_tree_TesteListas = parser.parse(TesteSintarico.TesteErroUsoIncorretoOpe())
+    tree.pydot__tree_to_png(parsed_tree_TesteListas)
+except UnexpectedToken as e:
+    expected = ", ".join(_ErrorMaper.traduz_token(t) for t in e.expected)
+    print(f"\nSyntaxError at line {e.line}, column {e.column}: Unexpected token '{e.token}' (type: {e.token.type}). Expected one of: {expected}.")
+
+#Erro colchete
+try:
+    parsed_tree_TesteListas = parser.parse(TesteSintarico.TesteFaltaColchete())
+    tree.pydot__tree_to_png(parsed_tree_TesteListas)
+except UnexpectedToken as e:
+    expected = ", ".join(_ErrorMaper.traduz_token(t) for t in e.expected)
+    print(f"\nSyntaxError at line {e.line}, column {e.column}: Unexpected token '{e.token}' (type: {e.token.type}). Expected one of: {expected}.")
+
+
+#Erro parametros
+try:
+    parsed_tree_TesteListas = parser.parse(TesteSintarico.TesteFaltaParentese())
+    tree.pydot__tree_to_png(parsed_tree_TesteListas)
+except UnexpectedToken as e:
+    expected = ", ".join(_ErrorMaper.traduz_token(t) for t in e.expected)
+    print(f"\nSyntaxError at line {e.line}, column {e.column}: Unexpected token '{e.token}' (type: {e.token.type}). Expected one of: {expected}.")
+
+#Erro loop
+try:
+    parsed_tree_TesteListas = parser.parse(TesteSintarico.TesteSintaticoLoop())
+    tree.pydot__tree_to_png(parsed_tree_TesteListas)
+except UnexpectedToken as e:
+    expected = ", ".join(_ErrorMaper.traduz_token(t) for t in e.expected)
+    print(f"\nSyntaxError at line {e.line}, column {e.column}: Unexpected token '{e.token}' (type: {e.token.type}). Expected one of: {expected}.")
+

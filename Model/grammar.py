@@ -4,17 +4,17 @@ class Grammar:
     def grammar(Self) -> str:
 
         _grammar = r"""
-        start: statement+ _NEWLINE?
+        start: value+ 
 
-        statement: var_decl
+        value: var_decl
                  | assignment
-                 | if_stmt
-                 | while_stmt
-                 | for_stmt
+                 | if
+                 | while
+                 | for
                  | func_def
                  | func_call 
-                 | print_stmt
-                 | input_stmt
+                 | print
+                 | input
 
         var_decl: type ID "=" expr _NEWLINE
         type: "int" | "float" | "str" | "bool" | "char" | list_type
@@ -22,14 +22,14 @@ class Grammar:
 
         assignment: ID "=" expr _NEWLINE
 
-        print_stmt: "print" "(" expr ")" _NEWLINE
-        input_stmt: "input" "(" ")" _NEWLINE
+        print: "print" "(" expr ")" _NEWLINE
+        input: "input" "(" ")" _NEWLINE
 
-        if_stmt: "if" "(" expr ")" "{" statement+ "}" ["else" "{" statement+ "}"]
-        while_stmt: "while" "(" expr ")" "{" statement+ "}"
-        for_stmt: "for" "(" "int" ID "in" "range" "(" expr ")" ")" "{" statement+ "}"
+        if: "if" "(" expr ")" "{" value+ "}" ["else" "{" value+ "}"]
+        while: "while" "(" expr ")" "{" value+ "}"
+        for: "for" "(" "int" ID "in" "range" "(" expr ")" ")" "{" value+ "}"
 
-        func_def: "def" type ID "(" [params] ")" "{" statement+ "return" expr _NEWLINE "}"
+        func_def: "def" type ID "(" [params] ")" "{" value+ "return" expr _NEWLINE "}"
         params: param ("," param)*
         param: type ID
 
@@ -98,17 +98,17 @@ class Grammar:
     def grammar(Self) -> str:
 
         _grammar = r"""
-        start: statement+ _NEWLINE?
+        start: value+ 
 
-        statement: var_decl
+        value: var_decl
                  | assignment
-                 | if_stmt
-                 | while_stmt
-                 | for_stmt
+                 | if
+                 | while
+                 | for
                  | func_def
                  | func_call 
-                 | print_stmt
-                 | input_stmt
+                 | print
+                 | input
 
         var_decl: type ID "=" expr _NEWLINE
         type: "int" | "float" | "str" | "bool" | "char" | list_type
@@ -116,14 +116,14 @@ class Grammar:
 
         assignment: ID "=" expr _NEWLINE
 
-        print_stmt: "print" "(" expr ")" _NEWLINE
-        input_stmt: "input" "(" ")" _NEWLINE
+        print: "print" "(" expr ")" _NEWLINE
+        input: "input" "(" ")" _NEWLINE
 
-        if_stmt: "if" "(" expr ")" "{" statement+ "}" ["else" "{" statement+ "}"]
-        while_stmt: "while" "(" expr ")" "{" statement+ "}"
-        for_stmt: "for" "(" "int" ID "in" "range" "(" expr ")" ")" "{" statement+ "}"
+        if: "if" "(" expr ")" "{" value+ "}" ["else" "{" value+ "}"]
+        while: "while" "(" expr ")" "{" value+ "}"
+        for: "for" "(" "int" ID "in" "range" "(" expr ")" ")" "{" value+ "}"
 
-        func_def: "def" type ID "(" [params] ")" "{" statement+ "return" expr _NEWLINE "}"
+        func_def: "def" type ID "(" [params] ")" "{" value+ "return" expr _NEWLINE "}"
         params: param ("," param)*
         param: type ID
 
@@ -194,17 +194,17 @@ class Grammar:
     def grammar(Self) -> str:
 
         _grammar = """
-        start: statement+ _NEWLINE?
+        start: value+ 
 
-        statement: var_decl
+        value: var_decl
                  | assignment
-                 | if_stmt
-                 | while_stmt
-                 | for_stmt
+                 | if
+                 | while
+                 | for
                  | func_def
                  | func_call 
-                 | print_stmt
-                 | input_stmt
+                 | print
+                 | input
 
         var_decl: type ID "=" expr _NEWLINE
         type: "int" | "float" | "str" | "bool" | "char" | list_type
@@ -212,14 +212,14 @@ class Grammar:
 
         assignment: ID "=" expr _NEWLINE
 
-        print_stmt: "print" "(" expr ")" _NEWLINE
-        input_stmt: "input" "(" ")" _NEWLINE
+        print: "print" "(" expr ")" _NEWLINE
+        input: "input" "(" ")" _NEWLINE
 
-        if_stmt: "if" "(" expr ")" "{" statement+ "}" ["else" "{" statement+ "}"]
-        while_stmt: "while" "(" expr ")" "{" statement+ "}"
-        for_stmt: "for" "(" ID "in" expr ")" "{" statement+ "}"
+        if: "if" "(" expr ")" "{" value+ "}" ["else" "{" value+ "}"]
+        while: "while" "(" expr ")" "{" value+ "}"
+        for: "for" "(" ID "in" expr ")" "{" value+ "}"
 
-        func_def: "def" type ID "(" [params] ")" "{" statement+ "return" expr _NEWLINE "}"
+        func_def: "def" type ID "(" [params] ")" "{" value+ "return" expr _NEWLINE "}"
         params: param ("," param)*
         param: type ID
 
@@ -290,37 +290,36 @@ class Grammar:
     def grammar(Self) -> str:
 
         _grammar = """
-        start: (statement _NEWLINE?)+
+        start: (value)+
 
-        statement: var_decl
+        value: var_decl
                | assignment
-               | if_stmt
-               | while_stmt
-               | for_stmt
+               | if
+               | while
+               | for
                | func_def
                | func_call 
-               | print_stmt
-               | input_stmt
-               | return_stmt
+               | print
+               | input
+               | return
           
         
-        var_decl: type ID "=" expr _NEWLINE
+        var_decl: type ID "=" expr
         type: "int" | "float" | "str" | "bool" | "char" | list_type
         list_type: "list" "<" type ">"
 
-         assignment: ID assignment_op expr _NEWLINE?
-         assignment_op: "=" | "+=" | "-=" | "*=" | "/=" | "%="
+        assignment: ID assignment_op expr
+        assignment_op: "=" | "+=" | "-=" | "*=" | "/=" | "%="
 
+        print: "print" "(" expr ")" 
+        input: "input" "(" ")" 
+        return: "return" expr 
 
-        print_stmt: "print" "(" expr ")" _NEWLINE?
-        input_stmt: "input" "(" ")" _NEWLINE?
-        return_stmt: "return" expr _NEWLINE?
+        if: "if" "(" expr ")" "{" value+ "}" ["else" "{" value+ "}"]
+        while: "while" "(" expr ")" "{" value+ "}"  
+        for: "for" "(" type ID "in" expr ")" "{" value+ "}" 
 
-        if_stmt: "if" "(" expr ")" "{"  _NEWLINE? statement+ _NEWLINE? "}" ["else" "{"  _NEWLINE? statement+  _NEWLINE? "}"]
-        while_stmt: "while" "(" expr ")" "{"  _NEWLINE? statement+  _NEWLINE? "}"  _NEWLINE?
-        for_stmt: "for" "(" type ID "in" expr ")" "{" _NEWLINE? statement+ _NEWLINE? "}" _NEWLINE?
-
-        func_def: "def" type ID "(" [params] ")" "{" _NEWLINE? statement+ _NEWLINE? "}"
+        func_def: "def" type ID "(" [params] ")" "{" value+ "}"
         params: param ("," param)*
         param: type ID
 
@@ -379,10 +378,10 @@ class Grammar:
         CHAR_LITERAL: /'[^']'/
 
 
-        %import common.NEWLINE -> _NEWLINE
         %import common.ESCAPED_STRING
-        %import common.WS_INLINE
-        %ignore WS_INLINE
+        %import common.WS
+        %ignore WS
+        
         """
 
         return _grammar
