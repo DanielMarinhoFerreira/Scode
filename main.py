@@ -6,15 +6,12 @@ from Model.SyntaxError import ErrorMaper
 from Model.grammar import Grammar
 
 
-
 Teste = TesteScode()
 TesteLexico = TesteLexicoScode()
 TesteSintarico = TesteSintatico()
-
 Dir_Img = Sistema_Operacional()
 
-parser = Lark(Grammar().grammar(),parser="lalr", start="start")
-
+parser = Lark(Grammar().dir_grammar(),parser="lalr", start="start")
 #Teste Tipos Basicos 
 parsed_tree_TesteTiposBasicos = parser.parse(Teste.TesteTiposBasicos())
 tree.pydot__tree_to_png(parsed_tree_TesteTiposBasicos,filename=Dir_Img.Dir_Img()+"\\"+"Img_teste_Validos"+"\\"+"TesteTiposBasicos.png")
