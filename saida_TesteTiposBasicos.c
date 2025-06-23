@@ -4,6 +4,6 @@ int main() {
     float y = 3.14;
     str Z = "C";
     char z = 'D';
-    bool ativo = EXPR;
+    bool ativo = true;
     return 0;
 }

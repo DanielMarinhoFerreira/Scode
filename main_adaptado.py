@@ -30,7 +30,7 @@ def processar(nome, codigo):
         expected = ", ".join(e.expected)
         print(f"SyntaxError at line {e.line}, column {e.column}: Unexpected token '{e.token}' (type: {e.token.type}). Expected one of: {expected}.")
 
-#processar("TesteTiposBasicos", Teste.TesteTiposBasicos())
+processar("TesteTiposBasicos", Teste.TesteTiposBasicos())
 processar("TesteCondicional", Teste.TesteCondicional())
 processar("TesteListas", Teste.TesteListas())
 processar("TesteLoopFor", Teste.TesteLoopFor())

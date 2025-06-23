@@ -2,10 +2,12 @@
 int main() {
     int x = 10;
     if (x > 0) {
-        printf("%s\n", "Positivo");
+        printf("%s
+", "Positivo");
     }
     else {
-        printf("%s\n", "Negativo");
+        printf("%s
+", "Negativo");
     }
     return 0;
 }
